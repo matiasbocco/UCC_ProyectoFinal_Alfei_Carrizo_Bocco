@@ -20,7 +20,7 @@ public:
 
 int get_dnip ()const {
   return m_dni;}
-std::string get_nombrep (){
+std::string get_nombrep ()const{
   return m_nombre;}
 
   void set_dnip(int dni){

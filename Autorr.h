@@ -17,7 +17,7 @@ Autorr (std::string nombre,int dni,std::string medio)
 std::string get_medio(){
     return m_medio;};
 };
-//Hacer geters con persona.get_dni y seters
+
 
 
 

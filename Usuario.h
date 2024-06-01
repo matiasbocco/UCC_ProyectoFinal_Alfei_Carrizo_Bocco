@@ -12,17 +12,16 @@ Usuario(std::string nombre, int dni, int edad)
     :m_persona(nombre,dni)
     ,m_edad{edad}
     {
-    assert(m_edad >= 0);
+   // assert(m_edad >= 0);
     }
 
-    int get_dni()const{
+    int get_dniU()const{
         return m_persona.get_dnip();}
     int get_edad()const{
         return m_edad;}
-    std::string get_nombre(){
+    std::string get_nombreU()const{
         return m_persona.get_nombrep();}
 
-    // Hacer seters
 void set_edad(int edad){
     m_edad=edad;
 }

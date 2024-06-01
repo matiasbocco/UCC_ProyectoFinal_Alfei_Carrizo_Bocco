@@ -30,19 +30,23 @@ comentarios.push_back(comentario);
 }
 
 
-// Hacer geters y seters
-
-int get_dia(){
-return m_dia;
+std::string get_titulo()const{
+    return m_titulo;}
+std::string get_detalle()const{
+    return  m_detalle;}
+int get_dia()const{
+    return m_dia;}
+int get_mes()const{
+    return m_mes;}
+int get_anio()const{
+    return m_anio;}
+int get_autorDNI()const{
+    return m_autorDNI;}
+void set_detalle(int detalle){
+m_detalle=detalle;
 }
-int get_mes(){
-return m_mes;
-}
-int get_anio(){
-    return m_anio;
-}
-int get_autorDNI(){
-    return m_autorDNI;
+void set_titulo(int titulo){
+m_titulo=titulo;
 }
 void set_dia(int dia){
     m_dia=dia;
