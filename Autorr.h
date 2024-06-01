@@ -1,18 +1,17 @@
 #pragma once
 #include <iostream>
-#include "Usuario.h"
-#include "Noticia.h"
+#include "Persona.h"
 class Autor: public Persona{
 private:
-    Usuario m_usuario();
-
-
+    Persona m_persona;
+std::string m_medio;
 public:
-    Autor (int dni, int edad, std::string nombre,std::string titulo, std::string detalle, int dia, int mes, int anio):
-m_usuario(dni,edad,nombre),
-m_noticia(titulo,detalle,dia,mes,anio){};
+Autor (int dni, std::string nombre,std::string medio):
+m_persona(nombre,dni),
+m_medio{medio}{
+assert(medio!="\0")
+    };
+//Hacer geters con persona.get_dni y seters
 
-    Autor (std::string titulo, std::string detalle, int dia, int mes, int anio):
-    m_noticia(titulo,detalle,dia,mes,anio){};
 
 };
