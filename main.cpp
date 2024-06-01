@@ -4,143 +4,173 @@
 #include "Usuario.h"
 #include "Noticia.h"
 
-void crearUsuario(std::vector<Usuario> usuarios);
-void crearAutor(std::vector<Autorr> autores);
-void crearNoticia(std::vector<Noticia> noticias);
+void crearUsuario(std::vector<Usuario>& usuarios,std::ofstream& archivous);
+void crearAutor(std::vector<Autorr>& autores, std::ofstream& archivoau);
+void crearNoticia(std::vector<Noticia>& noticias, std::ofstream& archivono);
 void comentarNoticia(std::vector<Noticia>& noticias, const std::vector<Autorr>& autores);
-
+void guardarUsuario(const Usuario& usuario, std::ofstream& archivo);
+void guardarAutor(const Autorr& autor, std::ofstream& archivo);
+void guardarNoticia(const Noticia& noticias, std::ofstream& archivono);
 int main(){
-    std::vector<Autorr> autores;
-    std::vector<Usuario> usuarios;
-    std::vector<Noticia> noticias;
+std::vector<Autorr> autores;
+std::vector<Usuario> usuarios;
+std::vector<Noticia> noticias;
 
-    std::ofstream archivo;
-    archivo.open("Sistema de Noticias.txt");
-    if (archivo.fail()){
-        std::cout<<"no se pudo abrir el archivo";
-    }
-    int opcion;
-    do{
-        std::cout << "\nMenu: " << "\n";
-        std::cout << "1- Registrar Usuario "<< "\n";
-        std::cout << "2- Registrar Autor" << "\n";
-        std::cout << "3- Crear Noticia "<< "\n";
-        std::cout << "4- Comentar Noticia" << "\n";
-        std::cout << "5- Mostrar listado de noticias publicadas en el anio" << "\n";
-        std::cout << "6- Mostrar listado de noticias publicadas en el ultimo mes" << "\n";
-        std::cout << "7- Mostrar noticia y sus comentarios" << "\n";
-        std::cout << "8- Mostar articulos publicados por autor" << "\n";
-        std::cout << "9- Salir" << "\n";
-        std::cin >> opcion;
-        
-        switch(opcion) {
-            case 1: {
-               crearUsuario(usuarios);
-                break;
-            }
+std::ofstream archivous;
+archivous.open("Usuarios.txt");
+if (archivous.fail()){
+std::cout<<"no se pudo abrir el archivo";}
 
-            case 2: {
-                crearAutor(autores);
-                break;
-            }
+std::ofstream archivoau;
+archivoau.open("Autores.txt");
+if (archivoau.fail()){
+std::cout<<"no se pudo abrir el archivo";}
 
-            case 3: {
-                crearNoticia(noticias);
-                break;
-            }
+std::ofstream archivono;
+archivono.open("Noticias.txt");
+if (archivono.fail()){
+std::cout<<"no se pudo abrir el archivo";}
 
-            case 4: {
-                comentarNoticia(noticias,autores);
-                break;
-            }
 
-            case 5: {
-                break;
-            }
+int opcion;
+do{
+std::cout << "\nMenu: " << "\n";
+std::cout << "1- Registrar Usuario "<< "\n";
+std::cout << "2- Registrar Autor" << "\n";
+std::cout << "3- Crear Noticia "<< "\n";
+std::cout << "4- Comentar Noticia" << "\n";
+std::cout << "5- Mostrar listado de noticias publicadas en el anio" << "\n";
+std::cout << "6- Mostrar listado de noticias publicadas en el ultimo mes" << "\n";
+std::cout << "7- Mostrar noticia y sus comentarios" << "\n";
+std::cout << "8- Mostar articulos publicados por autor" << "\n";
+std::cout << "9- Salir" << "\n";
+std::cin >> opcion;
 
-            case 6: {
-                break;
-            }
-
-            case 7: {
-                break;
-            }
-
-            case 8: {
-                break;
-            }
-
-            case 9: {
-                std::cout << "Saliendo del programa." << "\n";
-                break;
-            }
-        }
-
-    }while(opcion!=9);
-}
- void crearUsuario (std::vector<Usuario>& usuarios){
-     std::string nombre;
-     int dni;
-     int edad;
-     std::cout << "\nRegistrando Usuario" << "\n";
-     std::cout << "Ingrese su nombre: " << "\n";
-     std::cin >> nombre;
-     std::cout << "Ingrese su DNI: " << "\n";
-     std::cin >> dni;
-     std::cout << "Ingrese su edad: " << "\n";
-     std::cin >> edad;
-     usuarios.emplace_back(nombre, dni, edad);
-
+switch(opcion) {
+case 1: {
+crearUsuario(usuarios,archivous);
+break;
 }
 
-void crearAutor(std::vector<Autorr>& autores){
-    std::string nombre;
-    int dni;
-    std::string medio;
-    std::cout << "\nRegistrando Autor" << "\n";
-    std::cout << "Ingrese su nombre: " << "\n";
-    std::cin >> nombre;
-    std::cout << "Ingrese su DNI: " << "\n";
-    std::cin >> dni;
-    std::cout << "Ingrese el medio: " << "\n";
-    std::cin >> medio;
-    autores.emplace_back(nombre, dni, medio);
+case 2: {
+crearAutor(autores,archivoau);
+break;
 }
 
-void crearNoticia(std::vector<Noticia> noticias){
-    std::string titulo;
-    std::string detalle;
-    int dia;
-    int mes;
-    int anio;
-    int dniautor;
-    std::cout << "\nCreando Noticia" << "\n";
-    std::cout << "Ingrese el titulo: " << "\n";
-    std::cin >> titulo;
-    std::cout << "Ingrese detalle: " << "\n";
-    std::cin >> detalle;
-    std::cout << "Ingrese el dia: " << "\n";
-    std::cin >> dia;
-    std::cout << "Ingrese el mes: " << "\n";
-    std::cin >> mes;
-    std::cout << "Ingrese el anio: " << "\n";
-    std::cin >> anio;
-    std::cout << "Ingrese el dni del autor: " << "\n";
-    std::cin >> dniautor;
-    noticias.emplace_back(titulo,detalle,dia,mes,anio,dniautor);
+case 3: {
+crearNoticia(noticias,archivono);
+break;
+}
+
+case 4: {
+comentarNoticia(noticias,autores);
+break;
+}
+
+case 5: {
+break;
+}
+
+case 6: {
+break;
+}
+
+case 7: {
+break;
+}
+
+case 8: {
+break;
+}
+
+case 9: {
+std::cout << "Saliendo del programa." << "\n";
+break;
+}
+}
+
+}while(opcion!=9);
+}
+void crearUsuario (std::vector<Usuario>& usuarios,std::ofstream& archivous){
+std::string nombre;
+int dni;
+int edad;
+std::cout << "\nRegistrando Usuario" << "\n";
+std::cout << "Ingrese su nombre: " << "\n";
+std::cin >> nombre;
+std::cout << "Ingrese su DNI: " << "\n";
+std::cin >> dni;
+std::cout << "Ingrese su edad: " << "\n";
+std::cin >> edad;
+    Usuario nuevoUsuario(nombre, dni, edad);
+    usuarios.push_back(nuevoUsuario);
+    guardarUsuario(nuevoUsuario, archivous);
+}
+
+void guardarUsuario(const Usuario& usuario, std::ofstream& archivo) {
+
+archivo << usuario.get_nombreU() << "," << usuario.get_dniU() << "," << usuario.get_edad() << "\n";
+}
+
+void crearAutor(std::vector<Autorr>& autores, std::ofstream& archivoau){
+std::string nombre;
+int dni;
+std::string medio;
+std::cout << "\nRegistrando Autor" << "\n";
+std::cout << "Ingrese su nombre: " << "\n";
+std::cin >> nombre;
+std::cout << "Ingrese su DNI: " << "\n";
+std::cin >> dni;
+std::cout << "Ingrese el medio: " << "\n";
+std::cin >> medio;
+    Autorr nuevoAutorr(nombre, dni, medio);
+    autores.push_back(nuevoAutorr);
+    guardarAutor(nuevoAutorr, archivoau);
+
+}
+void guardarAutor(const Autorr& autor, std::ofstream& archivo) {
+archivo << autor.get_nombreA() << "," << autor.get_dniA() << "," << autor.get_medio() << "\n";
+}
+
+void crearNoticia(std::vector<Noticia>& noticias,std::ofstream& archivono){
+std::string titulo;
+std::string detalle;
+int dia;
+int mes;
+int anio;
+int dniautor;
+std::cout << "\nCreando Noticia" << "\n";
+std::cout << "Ingrese el titulo: " << "\n";
+std::cin >> titulo;
+std::cout << "Ingrese detalle: " << "\n";
+std::cin >> detalle;
+std::cout << "Ingrese el dia: " << "\n";
+std::cin >> dia;
+std::cout << "Ingrese el mes: " << "\n";
+std::cin >> mes;
+std::cout << "Ingrese el anio: " << "\n";
+std::cin >> anio;
+std::cout << "Ingrese el dni del autor: " << "\n";
+std::cin >> dniautor;
+Noticia nuevoNoticia(titulo,detalle,dia,mes,anio,dniautor);
+    noticias.push_back(nuevoNoticia);
+    guardarNoticia(nuevoNoticia, archivono);
+}
+void guardarNoticia(const Noticia& noticia, std::ofstream  & archivo) {
+archivo << noticia.get_titulo() << "," << noticia.get_detalle() << "," << noticia.get_dia() << "," << noticia.get_mes() << "," << noticia.get_anio() << "," << noticia.get_autorDNI() << "\n";
 }
 
 void comentarNoticia(std::vector<Noticia>& noticias, const std::vector<Autorr>& autores){
-    std::string texto,tituloNoticia;
-    int numero, usuarioDNI;
+std::string texto,tituloNoticia;
+int numero, usuarioDNI;
 
-    std::cout << "\nComentando Noticia" << "\n";
-    std::cout << "Ingrese el numero: " << "\n";
-    std::cin >> numero;
-    std::cout << "Ingrese el texto: " << "\n";
-    std::cin >> texto;
-    std::cout << "Ingrese el usuario: " << "\n";
-    std::cin >> usuarioDNI;
+std::cout << "\nComentando Noticia" << "\n";
+std::cout << "Ingrese el numero: " << "\n";
+std::cin >> numero;
+std::cout << "Ingrese el texto: " << "\n";
+std::cin >> texto;
+std::cout << "Ingrese el usuario: " << "\n";
+std::cin >> usuarioDNI;
 
 }
 
