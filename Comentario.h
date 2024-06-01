@@ -1,4 +1,4 @@
-#pragam once
+#pragma once
 #include <iostream>
 //Ver como funcionan los vectores
 class Comentario{

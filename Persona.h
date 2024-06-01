@@ -5,9 +5,14 @@ private:
     int m_dni;
 
 public:
-    Persona(std::string nombre,int dni):
-     m_nombre(nombre)
-    m_dni{dni},
+    Persona()
+    :m_nombre{'\0'}
+    ,m_dni{0}
+    {}
+
+    Persona(std::string nombre,int dni)
+    :m_nombre{nombre},
+    m_dni{dni}
     {
     assert(m_dni>9999999 && m_dni<99999999),
     assert(m_nombre != "\0");

@@ -8,21 +8,28 @@ private:
     int m_edad;
 
 public:
-Usuario(int dni, int edad, std::string nombre)
-    :m_persona(dni,nombre)
+Usuario(std::string nombre, int dni, int edad)
+    :m_persona(nombre,dni)
     ,m_edad{edad}
     {
-assert(m_edad >= 0);
+    assert(m_edad >= 0);
     }
 
-    int getdni()const{
-        return m_dni;
-    }
-    int getedad()const{
-        return m_edad;
-    }
-    std::string getnombre(){
-        return m_nombre;
-    }
+    int get_dni()const{
+        return m_persona.get_dnip();}
+    int get_edad()const{
+        return m_edad;}
+    std::string get_nombre(){
+        return m_persona.get_nombrep();}
+
     // Hacer seters
+void set_edad(int edad){
+    m_edad=edad;
+}
+void set_dnip(int dni){
+    m_persona.set_dnip(dni);
+}
+void set_nombrep(std::string nombre){
+    m_persona.set_nombep(nombre);
+}
 };

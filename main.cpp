@@ -1,6 +1,14 @@
 #include <iostream>
-void crearUsuario ();
-void crearAutor();
+#include <fstream>
+#include <vector>
+#include "Usuario.h"
+#include "Noticia.h"
+
+void crearUsuario(std::vector<Usuario> usuarios);
+void crearAutor(std::vector<Autorr> autores);
+void crearNoticia(std::vector<Noticia> noticias);
+void comentarNoticia(std::vector<Noticia>& noticias, const std::vector<Autorr>& autores);
+
 int main(){
 
 }
