@@ -32,4 +32,28 @@ comentarios.push_back(comentario);
 
 // Hacer geters y seters
 
+int get_dia(){
+return m_dia;
+}
+int get_mes(){
+return m_mes;
+}
+int get_anio(){
+    return m_anio;
+}
+int get_autorDNI(){
+    return m_autorDNI;
+}
+void set_dia(int dia){
+    m_dia=dia;
+}
+void set_mes(int mes){
+    m_mes=mes;
+}
+void set_anio(int anio){
+    m_anio=anio;
+}
+void set_autorDNI(int autorDNI){
+    m_autorDNI=autorDNI;
+}
 };

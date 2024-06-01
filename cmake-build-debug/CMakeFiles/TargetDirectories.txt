@@ -1,0 +1,3 @@
+C:/Users/Mbocco/CLionProjects/UCC_ProyectoFinal_Alfei_Carrizo_Bocco/cmake-build-debug/CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir
+C:/Users/Mbocco/CLionProjects/UCC_ProyectoFinal_Alfei_Carrizo_Bocco/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Mbocco/CLionProjects/UCC_ProyectoFinal_Alfei_Carrizo_Bocco/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -18,9 +18,13 @@ public:
     assert(m_nombre != "\0");
     }
 
-int get_dni ()const {
-  return m_dni;};
-std::string get_nombre (){
-  return m_nombre;};
+int get_dnip ()const {
+  return m_dni;}
+std::string get_nombrep (){
+  return m_nombre;}
 
+  void set_dnip(int dni){
+        m_dni=dni;}
+void set_nombep(std::string nombre){
+    m_nombre=nombre;}
 };
