@@ -4,20 +4,29 @@
 #include "Usuario.h"
 #include "Noticia.h"
 
+
 void crearUsuario(std::vector<Usuario>& usuarios,std::ofstream& archivous);
 void crearAutor(std::vector<Autorr>& autores, std::ofstream& archivoau);
 void crearNoticia(std::vector<Noticia>& noticias, std::ofstream& archivono);
-void comentarNoticia(std::vector<Noticia>& noticias, const std::vector<Autorr>& autores);
+void comentarNoticia(std::vector<Noticia>& noticias,std::vector<Usuario>& usuarios,std::ofstream& archivono);
 void guardarUsuario(const Usuario& usuario, std::ofstream& archivo);
 void guardarAutor(const Autorr& autor, std::ofstream& archivo);
 void guardarNoticia(const Noticia& noticias, std::ofstream& archivono);
-void listarNoticiasAnio(const std::vector<Noticia>& noticias, int anio);
-void listarArticulosPorAutor(const std::vector<Noticia>& noticias, const int dniAutor);
+void listarNoticiasAnio(const std::vector<Noticia>& noticias);
+void listarNoticiasMes(const std::vector<Noticia>& noticias);
+void listarArticulosPorAutor(const std::vector<Noticia>& noticias);
+void guardarComentario(const Comentario& comentario, std::ofstream& archivous);
+void NoticiasComentarios( std::vector<Noticia>& noticias);
 
 int main(){
+
+// creamos los vectores
+
 std::vector<Autorr> autores;
 std::vector<Usuario> usuarios;
 std::vector<Noticia> noticias;
+
+//creamos los archivos
 
 std::ofstream archivous;
 archivous.open("Usuarios.txt");
@@ -34,6 +43,7 @@ archivono.open("Noticias.txt");
 if (archivono.fail()){
 std::cout<<"no se pudo abrir el archivo";}
 
+//menu de opciones
 
 int opcion;
 do{
@@ -52,151 +62,250 @@ std::cin >> opcion;
 switch(opcion) {
 case 1: {
 crearUsuario(usuarios,archivous);
-break;
-}
+break;}
 
 case 2: {
 crearAutor(autores,archivoau);
-break;
-}
+break;}
 
 case 3: {
 crearNoticia(noticias,archivono);
-break;
-}
+break;}
 
 case 4: {
-comentarNoticia(noticias,autores);
-break;
-}
+comentarNoticia(noticias,usuarios,archivous);
+break;}
 
-case 5: {
-    int anio;
-    std::cout<<"Ingrese el anio el cual desea saber las noticias del mismo \n";
-    std::cin>>anio;
-listarNoticiasAnio( noticias, anio);
-break;
-}
+case 5:{
+    listarNoticiasAnio(noticias);
+break;}
 
 case 6: {
-break;
-}
+listarNoticiasMes(noticias);
+break;}
 
 case 7: {
-break;
-}
+    NoticiasComentarios(noticias);
+break;}
 
 case 8: {
-    int dniAutor;
-    std::cout<<"Ingrese el DNI del autor el cual desea ver sus noticias\n";
-    std::cin>>dniAutor;
-    listarArticulosPorAutor(noticias, dniAutor);
-break;
-}
+    listarArticulosPorAutor(noticias);
+break;}
 
 case 9: {
-std::cout << "Saliendo del programa." << "\n";
-break;
-}
-}
+std::cout << "Saliendo del programa \n";
+break;}}
 
 }while(opcion!=9);
 }
+
+void comentarNoticia (std::vector<Noticia>& noticias, std::vector<Usuario>& usuarios, std::ofstream& archivono) {
+    std::string texto, tituloNoticia;
+    int numero, usuarioDNI;
+
+    std::cout<<"\nComentando Noticia\n";
+    std::cout<<"Ingrese el titulo de la noticia a comentar: \n";
+    std::cin.ignore();
+    std::getline(std::cin, tituloNoticia);
+    std::cout<<"Ingrese el numero: \n";
+    std::cin>> numero;
+    std::cin.ignore();
+    std::cout<<"Ingrese el texto: \n";
+    std::getline(std::cin, texto);
+    std::cout<<"Ingrese el dni del usuario: \n";
+    std::cin>>usuarioDNI;
+    std::cin.ignore();
+bool usuarioEncontrado = false;
+    for (const auto& usuario : usuarios) {
+        if (usuario.get_dniU() == usuarioDNI) {
+            usuarioEncontrado = true;
+            break;
+        }
+    }
+    if (usuarioEncontrado==false) {
+        std::cout << "Error: Usuario no encontrado.\n";
+        return;
+    }
+    bool noticiaEncontrada = false;
+    for (auto& noticia : noticias) {
+        if (noticia.get_titulo() == tituloNoticia) {
+            noticia.comentar(Comentario(numero, texto, usuarioDNI));
+            noticiaEncontrada = true;
+            break;
+        }
+    }
+    if (noticiaEncontrada==false) {
+        std::cout << "Error: Noticia no encontrada.\n";
+        return;
+    }
+guardarComentario(Comentario(numero, texto, usuarioDNI),archivono);
+}
+
 void crearUsuario (std::vector<Usuario>& usuarios,std::ofstream& archivous){
 std::string nombre;
-int dni;
-int edad;
-std::cout << "\nRegistrando Usuario" << "\n";
-std::cout << "Ingrese su nombre: " << "\n";
-std::cin >> nombre;
-std::cout << "Ingrese su DNI: " << "\n";
-std::cin >> dni;
-std::cout << "Ingrese su edad: " << "\n";
-std::cin >> edad;
+    int dni;
+    int edad;
+    std::cout << "\nRegistrando Usuario\n";
+    std::cout << "Ingrese su nombre: \n";
+    std::cin.ignore();
+    std::getline(std::cin, nombre);
+    std::cout << "Ingrese su DNI: \n";
+    std::cin >> dni;
+    std::cout << "Ingrese su edad: \n";
+    std::cin >> edad;
+    std::cin.ignore();
     Usuario nuevoUsuario(nombre, dni, edad);
     usuarios.push_back(nuevoUsuario);
     guardarUsuario(nuevoUsuario, archivous);
-}
 
+}
 void guardarUsuario(const Usuario& usuario, std::ofstream& archivo) {
-
-archivo << usuario.get_nombreU() << "," << usuario.get_dniU() << "," << usuario.get_edad() << "\n";
+archivo <<"Usuario: \n"<<"Nombre: "<< usuario.get_nombreU() << ", DNI: " << usuario.get_dniU() << ", Edad:" << usuario.get_edad() << "\n";
 }
+
 
 void crearAutor(std::vector<Autorr>& autores, std::ofstream& archivoau){
 std::string nombre;
-int dni;
-std::string medio;
-std::cout << "\nRegistrando Autor" << "\n";
-std::cout << "Ingrese su nombre: " << "\n";
-std::cin >> nombre;
-std::cout << "Ingrese su DNI: " << "\n";
-std::cin >> dni;
-std::cout << "Ingrese el medio: " << "\n";
-std::cin >> medio;
+    int dni;
+    std::string medio;
+    std::cout << "\nRegistrando Autor\n";
+    std::cout << "Ingrese su nombre: ";
+    std::cin.ignore();
+    std::getline(std::cin, nombre);
+    std::cout << "Ingrese su DNI: ";
+    std::cin >> dni;
+    std::cout << "Ingrese el medio: ";
+    std::cin.ignore();
+    std::getline(std::cin, medio);
     Autorr nuevoAutorr(nombre, dni, medio);
     autores.push_back(nuevoAutorr);
     guardarAutor(nuevoAutorr, archivoau);
-
 }
 void guardarAutor(const Autorr& autor, std::ofstream& archivo) {
-archivo << autor.get_nombreA() << "," << autor.get_dniA() << "," << autor.get_medio() << "\n";
+archivo <<"Autor: \n"<<"Nombre: " << autor.get_nombreA() << ", DNI autor:" << autor.get_dniA() << ", Medio: " << autor.get_medio() << "\n";
 }
+
 
 void crearNoticia(std::vector<Noticia>& noticias,std::ofstream& archivono){
 std::string titulo;
-std::string detalle;
-int dia;
-int mes;
-int anio;
-int dniautor;
-std::cout << "\nCreando Noticia" << "\n";
-std::cout << "Ingrese el titulo: " << "\n";
-std::cin >> titulo;
-std::cout << "Ingrese detalle: " << "\n";
-std::cin >> detalle;
-std::cout << "Ingrese el dia: " << "\n";
-std::cin >> dia;
-std::cout << "Ingrese el mes: " << "\n";
-std::cin >> mes;
-std::cout << "Ingrese el anio: " << "\n";
-std::cin >> anio;
-std::cout << "Ingrese el dni del autor: " << "\n";
-std::cin >> dniautor;
-Noticia nuevoNoticia(titulo,detalle,dia,mes,anio,dniautor);
-    noticias.push_back(nuevoNoticia);
-    guardarNoticia(nuevoNoticia, archivono);
+    std::string detalle;
+    int dia;
+    int mes;
+    int anio;
+    int dniautor;
+    std::cout << "\nCreando Noticia\n";
+    std::cout << "Ingrese el titulo: ";
+    std::cin.ignore();
+    std::getline(std::cin, titulo);
+    std::cout << "Ingrese detalle: ";
+    std::cin.ignore();
+    std::getline(std::cin, detalle);
+    std::cout << "Ingrese el dia: ";
+    std::cin >> dia;
+    std::cout << "Ingrese el mes: ";
+    std::cin >> mes;
+    std::cout << "Ingrese el anio: ";
+    std::cin >> anio;
+    std::cout << "Ingrese el dni del autor: ";
+    std::cin >> dniautor;
+    std::cin.ignore();
+    Noticia nuevaNoticia(titulo, detalle, dia, mes, anio, dniautor);
+    noticias.push_back(nuevaNoticia);
+    guardarNoticia(nuevaNoticia, archivono);
 }
 void guardarNoticia(const Noticia& noticia, std::ofstream  & archivo) {
-archivo << noticia.get_titulo() << "," << noticia.get_detalle() << "," << noticia.get_dia() << "," << noticia.get_mes() << "," << noticia.get_anio() << "," << noticia.get_autorDNI() << "\n";
+archivo << "Noticia: \n"<<"Titulo: " << noticia.get_titulo() << "," << noticia.get_detalle() << "," << noticia.get_dia() << "," << noticia.get_mes() << "," << noticia.get_anio() << "," << noticia.get_autorDNI() << "\n";
 }
 
-void comentarNoticia(std::vector<Noticia>& noticias, const std::vector<Autorr>& autores){
-std::string texto,tituloNoticia;
-int numero, usuarioDNI;
-
-std::cout << "\nComentando Noticia" << "\n";
-std::cout << "Ingrese el numero: " << "\n";
-std::cin >> numero;
-std::cout << "Ingrese el texto: " << "\n";
-std::cin >> texto;
-std::cout << "Ingrese el usuario: " << "\n";
-std::cin >> usuarioDNI;
+void guardarComentario(const Comentario& comentario, std::ofstream& archivo){
+    archivo <<"Comentario: \n" << comentario.get_texto() << ", Número: " << comentario.get_numero() << ", Comento:" << comentario.get_usuarioDNI() << "\n";
 }
 
-void listarNoticiasAnio(const std::vector<Noticia>& noticias, int anio) {
+void listarNoticiasAnio(const std::vector<Noticia>& noticias) {
+   int anio;
+    std::cout << "Ingrese el anio el cual desea saber las noticias del mismo \n";
+    std::cin >> anio;
+    std::cin.ignore();
+    bool hayNoticias = false;
     for (const auto& noticia : noticias) {
         if (noticia.get_anio() == anio) {
-            std::cout << noticia.get_titulo() << " - " ;
-}}}
+            std::cout << noticia.get_titulo() << " - " << noticia.get_detalle() << "\n";
+            hayNoticias = true;
+            break;
+            }
+        }
+    if(hayNoticias==false){
+        std::cout << "Error: No hay noticias registradas en ese anio \n";
+        return;
+        }
+       }
 
-void listarArticulosPorAutor(const std::vector<Noticia>& noticias, const int dniAutor) {
+void listarArticulosPorAutor(const std::vector<Noticia>& noticias) {
+    int dniAutor;
+    std::cout<<"Ingrese el DNI del autor el cual desea ver sus noticias\n";
+    std::cin>>dniAutor;
+    bool hayAutor=false;
     for (const auto& noticia : noticias) {
         if (noticia.get_autorDNI() == dniAutor) {
-            std::cout << "Título: " << noticia.get_titulo() << "\nDetalle: " << noticia.get_detalle() << "\n\n";
-        }
+            std::cout << "Titulo: " << noticia.get_titulo() << "\nDetalle: " << noticia.get_detalle() << "\n";
+hayAutor=true;
+break;
+}}
+    if(hayAutor==false){
+        std::cout<<"no hay noticias registradas de este autor \n";}
     }
-}
+
+void listarNoticiasMes(const std::vector<Noticia>& noticias){
+
+int mes, anio;
+    std::cout<<"Ingrese el anio y mes actual \n";
+    std::cin>>anio;
+    std::cin>>mes;
+    bool hayNoticiames=false;
+    bool hayNoticiaanio = false;
+    for (const auto& noticia : noticias) {
+        if (noticia.get_mes() == mes) {
+            hayNoticiames=true;
+            }
+        if (noticia.get_anio() == anio) {
+            hayNoticiaanio=true;
+            }
+            if(hayNoticiames==true || hayNoticiaanio==true){
+          std::cout << noticia.get_titulo() << " - " << noticia.get_detalle() << "\n";
+        }else{std::cout<<"no hay noticias registradas en este mes \n";}
+    }
+
+    }
+
+
+void NoticiasComentarios( std::vector<Noticia>& noticias){
+ std::string titulo;
+ std::cout << "Ingrese el titulo de la noticia: " <<"\n";
+ std::cin.ignore();
+ std::getline(std::cin,titulo);
+ bool existeNoticia=false;
+ for (auto& noticia : noticias) {
+        if (noticia.get_titulo() == titulo) {
+            std::cout << "Noticia encontrada:" << "\n";
+                std::cout << "Titulo: " << noticia.get_titulo() << "\n";
+                std::cout << "Detalle: " << noticia.get_detalle() << "\n";
+                std::cout << "Dia: " << noticia.get_dia() << "\n";
+                std::cout << "Mes: " << noticia.get_mes() << "\n";
+                std::cout << "Anio: " << noticia.get_anio() << "\n";
+                std::cout << "Autor DNI: " << noticia.get_autorDNI() << "\n";
+                std::cout << "Comentarios:" << "\n";
+                const std::vector<Comentario>& comentarios = noticia.get_comentarios();
+                for (const auto& Comentario : comentarios) {
+                   std::cout << "Usuario: " << Comentario.get_usuarioDNI() << "\n";
+                   std::cout << "Texto: " << Comentario.get_texto() << "\n";
+                }
+existeNoticia=true;
+                break;
+                }}
+ if(existeNoticia==false){
+     std::runtime_error("No existe una noticia con ese titulo");}
+        }
+
 
 
 //

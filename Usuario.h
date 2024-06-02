@@ -12,7 +12,7 @@ Usuario(std::string nombre, int dni, int edad)
     :m_persona(nombre,dni)
     ,m_edad{edad}
     {
-   // assert(m_edad >= 0);
+        assert(m_edad >= 0);
     }
 
     int get_dniU()const{

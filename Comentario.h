@@ -16,13 +16,13 @@ m_usuarioDNI{usuarioDNI}{
     //Usuario debe estar registrado
 }
 //geters y seters
-int get_numero (){
+int get_numero ()const{
     return m_numero;
 }
-std::string get_texto(){
+std::string get_texto ()const{
     return m_texto;
 }
-int get_usuarioDNI(){
+int get_usuarioDNI ()const{
     return m_usuarioDNI;
 }
 void set_numero(int numero){

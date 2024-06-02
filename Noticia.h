@@ -22,13 +22,11 @@ m_mes{mes},
 m_dia{dia},
 m_anio{anio},
 m_autorDNI{autorDNI}
+
 {}
 
-
 void comentar (const Comentario& comentario){
-comentarios.push_back(comentario);
-}
-
+comentarios.push_back(comentario);}
 
 std::string get_titulo()const{
     return m_titulo;}
@@ -42,6 +40,11 @@ int get_anio()const{
     return m_anio;}
 int get_autorDNI()const{
     return m_autorDNI;}
+
+ std::vector <Comentario>& get_comentarios(){
+return comentarios;
+}
+
 void set_detalle(int detalle){
 m_detalle=detalle;
 }
