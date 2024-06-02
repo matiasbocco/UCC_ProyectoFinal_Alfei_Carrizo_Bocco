@@ -214,11 +214,10 @@ std::string titulo;
     guardarNoticia(nuevaNoticia, archivono);
 }
 void guardarNoticia(const Noticia& noticia, std::ofstream  & archivo) {
-archivo << "Noticia: \n"<<"Titulo: " << noticia.get_titulo() << "," << noticia.get_detalle() << "," << noticia.get_dia() << "," << noticia.get_mes() << "," << noticia.get_anio() << "," << noticia.get_autorDNI() << "\n";
-}
+archivo << "Noticia: \n"<<"Titulo: " << noticia.get_titulo() << ", Detalle: " << noticia.get_detalle() << ", Dia: " << noticia.get_dia() << ", Mes: " << noticia.get_mes() << ", Anio: " << noticia.get_anio() <<  " , DNI del autor: " << noticia.get_autorDNI() << "\n";}
 
 void guardarComentario(const Comentario& comentario, std::ofstream& archivo){
-    archivo <<"Comentario: \n" << comentario.get_texto() << ", Número: " << comentario.get_numero() << ", Comento:" << comentario.get_usuarioDNI() << "\n";
+    archivo <<"Comentario: \n" << comentario.get_texto() << ", Número: " << comentario.get_numero() << ", Dni del usuario que comento:" << comentario.get_usuarioDNI() << "\n";
 }
 
 void listarNoticiasAnio(const std::vector<Noticia>& noticias) {
