@@ -11,6 +11,9 @@ void comentarNoticia(std::vector<Noticia>& noticias, const std::vector<Autorr>& 
 void guardarUsuario(const Usuario& usuario, std::ofstream& archivo);
 void guardarAutor(const Autorr& autor, std::ofstream& archivo);
 void guardarNoticia(const Noticia& noticias, std::ofstream& archivono);
+void listarNoticiasAnio(const std::vector<Noticia>& noticias, int anio);
+void listarArticulosPorAutor(const std::vector<Noticia>& noticias, const int dniAutor);
+
 int main(){
 std::vector<Autorr> autores;
 std::vector<Usuario> usuarios;
@@ -68,6 +71,10 @@ break;
 }
 
 case 5: {
+    int anio;
+    std::cout<<"Ingrese el anio el cual desea saber las noticias del mismo \n";
+    std::cin>>anio;
+listarNoticiasAnio( noticias, anio);
 break;
 }
 
@@ -80,6 +87,10 @@ break;
 }
 
 case 8: {
+    int dniAutor;
+    std::cout<<"Ingrese el DNI del autor el cual desea ver sus noticias\n";
+    std::cin>>dniAutor;
+    listarArticulosPorAutor(noticias, dniAutor);
 break;
 }
 
@@ -171,9 +182,21 @@ std::cout << "Ingrese el texto: " << "\n";
 std::cin >> texto;
 std::cout << "Ingrese el usuario: " << "\n";
 std::cin >> usuarioDNI;
-
 }
 
+void listarNoticiasAnio(const std::vector<Noticia>& noticias, int anio) {
+    for (const auto& noticia : noticias) {
+        if (noticia.get_anio() == anio) {
+            std::cout << noticia.get_titulo() << " - " ;
+}}}
+
+void listarArticulosPorAutor(const std::vector<Noticia>& noticias, const int dniAutor) {
+    for (const auto& noticia : noticias) {
+        if (noticia.get_autorDNI() == dniAutor) {
+            std::cout << "Título: " << noticia.get_titulo() << "\nDetalle: " << noticia.get_detalle() << "\n\n";
+        }
+    }
+}
 
 
 //

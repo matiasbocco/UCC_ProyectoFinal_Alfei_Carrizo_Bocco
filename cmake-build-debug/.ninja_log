@@ -1,11 +1,8 @@
 # ninja log v5
-7	1470	7389784166178955	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
-2	991	7389785426894088	build.ninja	c1872d6bb8fb6d9c
-6	1531	7389785444736565	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
-8	2480	7389795926166065	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
-9	1680	7389808359322773	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
-1682	2291	7389808365358666	UCC_ProyectoFinal_Alfei_Carrizo_Bocco.exe	74d75baf35cd388c
-6	1650	7389819337848607	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
-1652	2066	7389819341938586	UCC_ProyectoFinal_Alfei_Carrizo_Bocco.exe	74d75baf35cd388c
 13	1960	7389843301525129	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
 1962	2377	7389843305650585	UCC_ProyectoFinal_Alfei_Carrizo_Bocco.exe	74d75baf35cd388c
+2	991	7389982451202010	build.ninja	c1872d6bb8fb6d9c
+11	2967	7389985289278509	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
+2969	3492	7389985294460683	UCC_ProyectoFinal_Alfei_Carrizo_Bocco.exe	74d75baf35cd388c
+25	1136	7389997317087467	CMakeFiles/UCC_ProyectoFinal_Alfei_Carrizo_Bocco.dir/main.cpp.obj	2b24a612c43013be
+1137	1382	7389997319505686	UCC_ProyectoFinal_Alfei_Carrizo_Bocco.exe	74d75baf35cd388c
